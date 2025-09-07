@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Countdown</title>
+  <style>body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .countdown-container {
+    background: rgba(255, 182, 193, 0.85);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 25px;
+    font-style: italic;
+  }
+  
+  #countdown {
+  display: flex;
+  justify-content: center;
+  gap: clamp(5px, 2vw, 20px); /* gap shrinks on mobile */
+  flex-wrap: nowrap; /* force single line */
+}
+
+  
+#countdown div {
+  background: rgba(255, 105, 180, 0.9);
+  padding: clamp(8px, 2vw, 20px);
+  border-radius: 12px;
+  min-width: clamp(50px, 18vw, 80px); /* resizes with screen */
+}
+
+  
+#countdown span {
+  font-size: clamp(1rem, 4vw, 2rem); /* shrinks on small screens */
+  font-weight: bold;
+  display: block;
+}
+
+#countdown p {
+  margin: 0;
+  font-size: clamp(0.7rem, 3vw, 1rem);
+}
+
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <h1>🎉 Birthday Countdown 🎉</h1>
+    <p class="message">Mark the date… happiness is just around the corner! 🥳</p>
+    
+    <div id="countdown">
+      <div><span id="days"></span><p>Days</p></div>
+      <div><span id="hours"></span><p>Hours</p></div>
+      <div><span id="minutes"></span><p>Minutes</p></div>
+      <div><span id="seconds"></span><p>Seconds</p></div>
+    </div>
+  </div>
+
+  <script> // 🎯 Target Date (11 September 2025)
+  const targetDate = new Date("Sep 12, 2025 00:00:00").getTime();
+  
+  
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+  
+    if (diff <= 0) {
+      // Redirect to wish page
+      window.location.href = "wish/wish.html"
+      return;
+    }
+  
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  }
+  
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+  </script>
+</body>
+</html>
